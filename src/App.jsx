@@ -6,6 +6,7 @@ import AddGlobalVariables from "./components/AddGlobalVariables";
 import DefineGoal from "./components/DefineGoal";
 import DefineVariables from "./components/DefineVariables";
 import Summary from "./components/Summary";
+import ArcScriptEditor from "./components/ArcScriptEditor";
 
 // Main App Component
 function App() {
@@ -13,7 +14,12 @@ function App() {
   const [currentStep, setCurrentStep] = useState(0); // Tracks the current step in the flowchart
   const [globalVariables, setGlobalVariables] = useState([]); // Stores the global variables added by the user
   const [userChoices, setUserChoices] = useState([]); // Stores the user's choices for logic or actions
-  const [codePreview, setCodePreview] = useState("/* Your ArcScript code will appear here */"); // Displays the live code preview
+  const [codePreview, setCodePreview] = useState("// Your ArcScript code will appear here"); // Displays the live code preview
+
+  // Function to handle CKEditor changes
+  const handleEditorChange = (content) => {
+    setCodePreview(content); // Update the code preview with content from the editor
+  };
 
   // Function to navigate to the next step
   const handleNextStep = () => setCurrentStep(currentStep + 1);
@@ -82,13 +88,20 @@ function App() {
         />
       )}
 
-      {/* Step 4: Summary */}
+      {/* Step 4: Summary with ArcScriptEditor */}
       {currentStep === 4 && (
         <Summary
           globalVariables={globalVariables}
           userChoices={userChoices}
           onBack={handlePreviousStep}
-        />
+        >
+          {/* Include the ArcScriptEditor in the Summary */}
+          <h3>Review and Edit Your ArcScript</h3>
+          <ArcScriptEditor
+            initialData={codePreview} // Pass the current ArcScript preview as the initial data
+            onChange={handleEditorChange} // Update the code preview on editor changes
+          />
+        </Summary>
       )}
     </MainLayout>
   );
