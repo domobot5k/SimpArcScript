@@ -7,7 +7,7 @@ import CodeBlock from '@ckeditor/ckeditor5-code-block/src/codeblock';
 import FindAndReplace from '@ckeditor/ckeditor5-find-and-replace/src/findandreplace';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import Undo from '@ckeditor/ckeditor5-undo/src/undo';
-import Redo from '@ckeditor/ckeditor5-undo/src/redo';
+import Redo from '@ckeditor/ckeditor5-undo/src/redocommand';
 
 const ArcScriptEditor = ({ initialData, onChange }) => {
     const editorRef = useRef(null);
